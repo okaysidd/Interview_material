@@ -17,49 +17,35 @@ Output: false
 Example 3:
 Input: N = 5, dislikes = [[1,2],[2,3],[3,4],[4,5],[1,5]]
 Output: false
-
-Note:
-1 <= N <= 2000
-0 <= dislikes.length <= 10000
-1 <= dislikes[i][j] <= N
-dislikes[i][0] < dislikes[i][1]
-There does not exist i != j for which dislikes[i] == dislikes[j].
 """
 import collections
 
-
 class Solution:
 	"""
-	Graph question.
-	Create a undirected graph using the dislikes couples list. Hence we save
-	values for both directions.
-	For a bipartite graph, if we prove that each neighbour of any particular
-	node has different color than said node, we are sorted.
-	We take this logic, and call a dfs method for all the nodes in the graph
-	that we built, while maintaining all the nodes visited.
-	If a node is not visited, assign it a color and opposite color to all its
-	neighbors. If the node was already visited, check it for conflicts.
+	Classic graph Bipartite problem.
+	Uses groups/colors to separate the nodes in two different
+	groups. DFS is used. Starting from each node, assign it a color
+	and assign the opposite color to all its derivatives. Then
+	the opposite color to all their derivatives. If at any point
+	a contradiction arises, the bipartite is not possible.
+	https://en.wikipedia.org/wiki/Bipartite_graph
 	"""
-	def possibleBipartition(self, N: int, dislikes):
+	def possibleBipartition(self, N: int, dislikes) -> bool:
 		graph = collections.defaultdict(list)
-
 		for i in dislikes:
-			graph[i[0]].append(i[1]) # create undirected graphs
-			graph[i[1]].append(i[0]) # therefore flow can be both ways
-
+			graph[i[0]].append(i[1])
+			graph[i[1]].append(i[0])
 		visited = {} # dict to maintain all nodes visited
 
 		def dfs(node, color):
 			# check the node for color conflicts if already visited
 			if node in visited:
 				return visited[node] == color
-
 			# record color if not visited
 			visited[node] = color
-
 			return all([dfs(neighbor, 1-color) for neighbor in graph[node]])
 
-		res = all([dfs(node, 1) for node in graph if node not in visited]) # why "if node not in visited" is needed, still a mystery
+		res = all([dfs(node, 1) for node in graph])
 		return res
 
 N = 5

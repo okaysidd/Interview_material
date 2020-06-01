@@ -29,22 +29,44 @@ import collections
 
 
 class Solution:
+	"""
+	Graph question.
+	Create a undirected graph using the dislikes couples list. Hence we save
+	values for both directions.
+	For a bipartite graph, if we prove that each neighbour of any particular
+	node has different color than said node, we are sorted.
+	We take this logic, and call a dfs method for all the nodes in the graph
+	that we built, while maintaining all the nodes visited.
+	If a node is not visited, assign it a color and opposite color to all its
+	neighbors. If the node was already visited, check it for conflicts.
+	# NOTE: IMPORTANT!
+	"""
 	def possibleBipartition(self, N: int, dislikes):
 		graph = collections.defaultdict(list)
+
 		for i in dislikes:
-			graph[i[0]].append(i[1])
-			graph[i[1]].append(i[0])
+			graph[i[0]].append(i[1]) # create undirected graphs
+			graph[i[1]].append(i[0]) # therefore flow can be both ways
+
 		visited = {} # dict to maintain all nodes visited
 
 		def dfs(node, color):
 			# check the node for color conflicts if already visited
 			if node in visited:
 				return visited[node] == color
+
 			# record color if not visited
 			visited[node] = color
+
 			return all([dfs(neighbor, 1-color) for neighbor in graph[node]])
 
-		res = all([dfs(node, 1) for node in graph.keys() if node not in visited])
+		res = all([dfs(node, 1) for node in graph if node not in visited])
+		"""
+		since we are alloting a color manually (1 here), we'll only send those
+		nodes to the dfs function that have not already been visited. Because
+		if a node has been set to 0, and we call dfs on it with color 1, it'll
+		create a conflict, resulting in False result incorrectly.
+		"""
 		return res
 
 N = 5

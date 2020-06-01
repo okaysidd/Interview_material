@@ -35,20 +35,20 @@ class Solution:
 	do not copy one list full of zeros over x number of times as they will hold the
 	same memory location and will get affected as you alter one of them.!!!
 	"""
-    def longestCommonSubsequence(self, text1: str, text2: str, memo = None) -> int:
-        text1 = ' ' + text1
-        text2 = ' ' + text2
-        grid = [[0 for i in range(len(text2))] for j in range(len(text1))] # important
+	def longestCommonSubsequence(self, text1, text2, memo = None):
+		text1 = ' ' + text1
+		text2 = ' ' + text2
+		grid = [[0 for i in range(len(text2))] for j in range(len(text1))] # important
 		# as opposed to 
 		# grid1 = [[0]*len(text2)]*len(text1)
 		# memory location remains same for the copied lists.
-        for i in range(1, len(text1)):
-            for j in range(1, len(text2)):
-                if text1[i] == text2[j]:
-                    grid[i][j] = grid[i-1][j-1] + 1
-                else:
-                    grid[i][j] = max(grid[i-1][j], grid[i][j-1])
-        return grid[-1][-1]
+		for i in range(1, len(text1)):
+			for j in range(1, len(text2)):
+				if text1[i] == text2[j]:
+					grid[i][j] = grid[i-1][j-1] + 1
+				else:
+					grid[i][j] = max(grid[i-1][j], grid[i][j-1])
+		return grid[-1][-1]
 
 text1 = "ylqpejqbalahwr"
 text2 = "yrkzavgdmdgtqpgf"
@@ -68,20 +68,20 @@ class Solution2:
 	Slow way, uses recursion, and memoization is mandatory for any string
 	even length >15. Is a valid way, just a very slow one. Not recommended.
 	"""
-    def longestCommonSubsequence(self, text1: str, text2: str, memo = None) -> int:
-        if memo == None:
-            memo = {}
-        if (text1, text2) in memo.keys():
-            return memo[(text1, text2)]
-        if len(text1) == 0 or len(text2) == 0:
-            return 0
-        elif text1[0] == text2[0]:
-            memo[(text1, text2)] = 1+self.longestCommonSubsequence(text1[1:], text2[1:], memo)
-            return memo[(text1, text2)]
-        else:
-            memo[(text1, text2)] = max(self.longestCommonSubsequence(text1[1:], text2, memo), \
-                    self.longestCommonSubsequence(text1, text2[1:], memo))
-            return memo[(text1, text2)]
+	def longestCommonSubsequence(self, text1: str, text2: str, memo = None) -> int:
+		if memo == None:
+			memo = {}
+		if (text1, text2) in memo.keys():
+			return memo[(text1, text2)]
+		if len(text1) == 0 or len(text2) == 0:
+			return 0
+		elif text1[0] == text2[0]:
+			memo[(text1, text2)] = 1+self.longestCommonSubsequence(text1[1:], text2[1:], memo)
+			return memo[(text1, text2)]
+		else:
+			memo[(text1, text2)] = max(self.longestCommonSubsequence(text1[1:], text2, memo), \
+					self.longestCommonSubsequence(text1, text2[1:], memo))
+			return memo[(text1, text2)]
 
 text1 = "ylqpejqbalahwr"
 text2 = "yrkzavgdmdgtqpgf"
