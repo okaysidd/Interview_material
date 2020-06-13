@@ -32,11 +32,12 @@ class BreadthFirstSearch:
 		while frontier:
 			next = []
 			for node in frontier:
-				for nei in graph[node]:
-					if nei not in level:
-						next.append(nei)
-						level[nei] = i
-						parent[nei] = node
+				if nei in graph:
+					for nei in graph[node]:
+						if nei not in level:
+							next.append(nei)
+							level[nei] = i
+							parent[nei] = node
 			i += 1
 			frontier = next
 		return level, parent
