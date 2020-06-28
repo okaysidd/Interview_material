@@ -4,7 +4,7 @@ list as the input.
 The adjecency list will change depending on whether the graph is
 directed or undirected. The code remains the same.
 Uses of BFS:
-- Finding shortest path
+- Finding shortest path**
 - Solving rubik's cube
 - Finding all paths
 """

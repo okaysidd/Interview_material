@@ -1,0 +1,20 @@
+Authentication and Authorization
+
+Authentication: verifying who you are
+Authorization: verifying if you have access to a resource
+
+Authentication: logging into a website with Google/Facebook logging
+Authorization:  giving access to username/photos on Google/Facebook to the website
+---------------------------------
+Once user is logged in, a cookie stores authentication details so user does not have to login again and again.
+This creates a session. Stealing someone's cookies can enable logging to that user's account without access to
+the login credentials. This is called "Session Highjacking".
+https://en.wikipedia.org/wiki/Session_hijacking
+
+Authentication flows-
+Some oauths give developers to do the authentication on the client side itself.
+Some give the server side the ability to store an access token that will allow the server to access APIs on behalf of the user.
+There is a timeout associated with the access token, and user can also revoke it at anytime.
+Google provides Hybrid flow, where authentication happens on client side (JS) but the server gets an access token too.
+https://aaronparecki.com/oauth-2-simplified/
+
