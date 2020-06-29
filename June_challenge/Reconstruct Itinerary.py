@@ -22,9 +22,15 @@ Explanation: Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","
 			 But it is larger in lexical order.
 """
 class Solution:
+	"""
+	Basically Topolgical sort, because-
+	- Directed edges
+	- Will not be cyclic, since can only go over an edge once
+	- All nodes need to be visited.
+	"""
 	def findItinerary(self, tickets):
 		adj = {}
-		for x, y in tickets[::-1]:
+		for x, y in sorted(tickets)[::-1]: # to maintain lexical order
 			if x in adj:
 				adj[x].append(y)
 			else:
@@ -33,10 +39,10 @@ class Solution:
 		def dfs(node):
 			while node in adj and len(adj[node]) != 0:
 				dfs(adj[node].pop())
-			result.append(node)
-			pass
+			result.append(node) # when a route from a node is completely visited, then add it
 		
 		dfs('JFK')
+		# since nodes that "finishes" first gets added first, we reverse the route to get the correct one
 		return result[::-1]
 
 tickets = [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
