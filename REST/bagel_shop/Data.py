@@ -56,11 +56,15 @@ class Data:
 				bagel.picture
 				] for bagel in bagels})
 	
-	def get_users(self):
-		users = self.session.query(User).all()
-		return jsonify({
-			user.name : 
-			[
-				user.username,
-				user.password
-				] for user in users})
+	def get_users(self, id=None):
+		if id == None:
+			users = self.session.query(User).all()
+			return jsonify({
+				user.name : 
+				[
+					user.username,
+					user.password_hash
+					] for user in users})
+		else:
+			user = self.session.query(User).filter_by(id=id).one()
+			return jsonify({"username": user.username, "password":user.password})

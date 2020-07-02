@@ -39,7 +39,7 @@ class Data:
 		"""
 		if id != None:
 			user = self.session.query(User).filter_by(id=id).one()
-			return jsonify({'username': user.username})
+			return jsonify({'username': user.username, "password":user.password})
 
 		else:
 			users = self.session.query(User).all()
