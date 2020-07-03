@@ -58,13 +58,20 @@ class Data:
 		return categories
 
 	def check_user(self, username=None, id=None):
+		print(f'username -- {username}, id -- {id}')
 		if not username and not id:
 			print('Neither username nor id provided')
 			abort(400)
 		if username != None:
-			user = self.session.query(User).filter_by(username=username).first()
+			try:
+				user = self.session.query(User).filter_by(username=username).one()
+			except:
+				return False
 		elif id != None:
-			user = self.session.query(User).filter_by(id=id).first()
+			try:
+				user = self.session.query(User).filter_by(id=id).one()
+			except:
+				return False
 		if user == None:
 			return False
 		return user

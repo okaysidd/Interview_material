@@ -22,16 +22,25 @@ app = Flask(__name__)
 def verify_password(username_or_token, password):
 	data = Data()
 	username_or_token = request.json.get('username')
-	password = request.json.get('password')
+	print(f'username_or_token -- {username_or_token}')
 	user_id = User.verify_auth_token(username_or_token)
+	print(f'user_id -- {user_id}')
 	if user_id:
+		print('user_id - if true')
 		user = data.check_user(username=None, id=user_id)
+		if user != False:
+			g.user = user
+			return True
 	else:
+		print('user_id - if false')
 		user = data.check_user(username=username_or_token, id=None)
-	if not user or not user.verify_password(password):
-		return False
-	g.user = user
-	return True
+		print(f'user -- {user}')
+		password = request.json.get('password')
+		if password == None:
+			return False
+		if password != None and user.verify_password(password):
+			g.user = user
+			return True
 
 
 #add /token route here to get a token for a user with login credentials
@@ -61,7 +70,6 @@ def new_user():
 def get_user(id):
 	data = Data()
 	user = data.get_record(id=id, type='user')
-	# user = session.query(User).filter_by(id=id).one()
 	if not user:
 		abort(400)
 	return jsonify({'username': user.username})
@@ -79,16 +87,12 @@ def showAllProducts():
 	data = Data()
 	if request.method == 'GET':
 		products = data.get_record(id=None, type='product')
-		# products = session.query(Product).all()
 		return jsonify(products = [p.serialize for p in products])
 	if request.method == 'POST':
 		name = request.json.get('name')
 		category = request.json.get('category')
 		price = request.json.get('price')
 		new_product = data.create_products(name=name, category=category, price=price)
-		# newItem = Product(name = name, category = category, price = price)
-		# session.add(newItem)
-		# session.commit()
 		return jsonify(new_product.serialize)
 
 
@@ -98,18 +102,16 @@ def showCategoriedProducts(category):
 	data = Data()
 	products = data.get_products(category)
 	return jsonify(products = [p.serialize for p in products])
-	# if category == 'fruit':
-	#     fruit_items = session.query(Product).filter_by(category = 'fruit').all()
-	#     return jsonify(fruit_products = [f.serialize for f in fruit_items])
-	# if category == 'legume':
-	#     legume_items = session.query(Product).filter_by(category = 'legume').all()
-	#     return jsonify(legume_products = [l.serialize for l in legume_items])
-	# if category == 'vegetable':
-	#     vegetable_items = session.query(Product).filter_by(category = 'vegetable').all()
-	#     return jsonify(produce_products = [p.serialize for p in produce_items])
 
 
 if __name__ == '__main__':
 	app.debug = True
 	#app.config['SECRET_KEY'] = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
 	app.run(host='0.0.0.0', port=5000)
+
+"""
+{
+    "username":"okaysidd3",
+    "password":"okaysidd"
+}
+"""
