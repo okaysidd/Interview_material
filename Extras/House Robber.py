@@ -30,8 +30,8 @@ class Solution1:
 		if len(nums) == 0:
 			return 0
 		dp = [0]*(len(nums)+1)
-		dp[0] = 0
-		dp[1] = nums[0]
+		dp[0] = 0 # for 0 house, this is the amount that can be stolen
+		dp[1] = nums[0] # for 1 house, the first house can only be stolen
 		for i in range(1, len(nums)):
 			dp[i+1] = max(dp[i-1]+nums[i], dp[i])
 		return dp[-1]
@@ -52,6 +52,17 @@ class Solution2:
 			prev_max = cur_max
 			cur_max = m
 		return m
+	
+	def rob_new(self, nums): # just more compact
+		try:
+			prev = 0
+			current = new_val = nums[0]
+			for i in range(1, len(nums)):
+				new_val = max(prev+nums[i], current)
+				prev, current = current, new_val
+			return current
+		except:
+			return 0
 
 nums = [2,7,9,3,100]
 x = Solution1()

@@ -49,6 +49,17 @@ class Solution2:
 			head = temp
 		return new.next
 
+class Solution3:
+	"""
+	Recursive solution.
+	"""
+	def reverseList(self, head, prev=None):
+		if not head:
+			return prev
+		n = head.next
+		head.next = prev
+		return self.reverseList(n, head)
+
 a = ListNode(1)
 a.next = ListNode(2)
 a.next.next = ListNode(3)

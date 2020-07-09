@@ -23,11 +23,11 @@ class Solution:
 	loop (i), the inner loop will only run from i+1 to the end, and not
 	the complete arary (since buy before sell policy).
 	So instead of running two loops, we update min price to buy at, at every
-	step, while updating maxprofit (earlier or current i - minprice).
-	Conversely if we maintain max price like we are maintaining min price,
+	step, while updating maxprofit (earlier or current i - (the updated) minprice).
+	NOT-NEEDED~~~Conversely if we maintain max price like we are maintaining min price,
 	that will result in the max price, irrespective of its position.
 	So instead we subtract at each step from the minprice till that point
-	to make sure we pick sell after buy.
+	to make sure we pick sell after buy.~~~NOT-NEEDED
 	"""
 	def maxProfit(self, prices):
 		minprice = 99999
