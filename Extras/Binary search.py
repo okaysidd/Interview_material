@@ -11,13 +11,13 @@ def binary_search(arr, x):
 	mid = 0
 	while low <= high:
 		mid = low + ((high - low) // 2) # to prevent overflow
-		# Check if x is present at mid
+		# If x is greater, ignore left half
 		if arr[mid] < x:
 			low = mid + 1  
-		# If x is greater, ignore left half
+		# If x is smaller, ignore right half
 		elif arr[mid] > x:
 			high = mid - 1  
-		# If x is smaller, ignore right half
+		# Check if x is present at mid
 		else:
 			return mid
 	# If we reach here, then the element was not present
@@ -25,4 +25,6 @@ def binary_search(arr, x):
 
 arr = [1,2,3,4,5,6]
 k = 4
+arr = [1]
+k = 1
 print(binary_search(arr, k))

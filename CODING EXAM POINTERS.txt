@@ -1,0 +1,20 @@
+CODING EXAM POINTERS
+
+Note down:
+- Expectation from question/problem description
+- Input(s)
+- Output
+- Assumptions (does input fit in memory? can input be nagative? expected run time/space)
+- Edge cases (list has only 1 element, no element, etc.)
+
+Logic/Ideas in english -> Comments/pseudocode -> Code
+
+After writing pseudocode/code -> Run through a general test case, that is not typical for that problem, general.
+Then run through some edge cases.
+
+Ask interviewer if they expect you to improve on the time/space complexity
+
+Don't panic if the question is too hard or you're not able to complete
+It is often a test for: Bar raiser or Performance under pressure
+
+Its okay to ask - Am I going in the right direction?

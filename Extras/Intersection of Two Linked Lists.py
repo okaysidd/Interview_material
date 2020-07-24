@@ -30,9 +30,9 @@ Your code should preferably run in O(n) time and use only O(1) memory.
 """
 # Definition for singly-linked list.
 class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
+	def __init__(self, x):
+		self.val = x
+		self.next = None
 
 class Solution:
 	"""
@@ -41,28 +41,28 @@ class Solution:
 	is to find the point of intersection.
 	Two solutions for that basically.
 	1) Traverse both and store their lengths. Then traverse both
-	together, ensuring longer one catches up with the smaller one
+	together, ensuring longer one catches up with the smaller one #NOTE : as in run the larger one for len(larger)-len(smaller) times, then rest nodes will be aligned
 	and then traverse both together, whereever they match, that's
 	the intersection, whether a node or None.
 	2) Traverse both and unless both become equal (node or None),
 	replace one node with head of another if it reaches the end.
 	IT WORKS.
 	"""
-    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
-        if not headA or not headB:
-            return
-        a = headA
-        b = headB
-        while a != b:
-            if a == None:
-                a = headB
-            else:
-                a = a.next
-            if b == None:
-                b = headA
-            else:
-                b = b.next
-        return a
+	def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+		if not headA or not headB:
+			return
+		a = headA
+		b = headB
+		while a != b:
+			if a == None:
+				a = headB
+			else:
+				a = a.next
+			if b == None:
+				b = headA
+			else:
+				b = b.next
+		return a
 
 a = ListNode(1)
 a.next = ListNode(2)

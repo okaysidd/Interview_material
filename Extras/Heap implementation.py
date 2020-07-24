@@ -12,7 +12,8 @@ iterate through all the nodes.
 If we are looking at the i-th index in an array:
 	It’s parent is at the floor (i-1)/2 index.
 	It’s left child is at 2 * i + 1 index.
-	It’s right child is at 2 *i + 2 index.
+	It’s right child is at 2 * i + 2 index.
+	# NOTE : THESE ARE FOR ZERO INDEXED DATA STRUCTURES
 """
 class Heap:
 	def __init__(self):
