@@ -24,6 +24,7 @@ class Solution:
 				d[st1].append(st)
 			else:
 				d[st1] = [st]
+		print(d)
 		return list(d.values())
 
 strs = ["eat", "tea", "tan", "ate", "nat", "bat", "banana", "baaann"]

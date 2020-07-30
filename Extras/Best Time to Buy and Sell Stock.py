@@ -23,7 +23,7 @@ class Solution:
 	loop (i), the inner loop will only run from i+1 to the end, and not
 	the complete arary (since buy before sell policy).
 	So instead of running two loops, we update min price to buy at, at every
-	step, while updating maxprofit (earlier or current i - (the updated) minprice).
+	step, while updating maxprofit (earlier, or current i - (the updated) minprice).
 	NOT-NEEDED~~~Conversely if we maintain max price like we are maintaining min price,
 	that will result in the max price, irrespective of its position.
 	So instead we subtract at each step from the minprice till that point
@@ -36,6 +36,14 @@ class Solution:
 			minprice = min(minprice, i)
 			maxprofit = max(maxprofit, i-minprice)
 		return maxprofit
+
+class Solution2:
+	def maxProfit(self, prices):
+		m = 0
+		for i in range(len(prices)-1):
+			for j in range(i, len(prices)):
+				m = max(m, prices[j]-prices[i])
+		return m
 
 prices = [7,1,5,3,6,4]
 a = Solution()

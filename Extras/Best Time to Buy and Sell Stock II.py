@@ -29,7 +29,7 @@ class Solution:
 	"""
 	"The profit is the sum of sub-profits."
 	Keeping this in mind, we go from zero to second last index and
-	add the difference between cuurent and current+1 if the difference
+	add the difference between curent and current+1 if the difference
 	is positive. Otherwise won't need to add it.
 	THIS IS A BRILLIANT SOLUTION. REMEMBER IT.
 	"""

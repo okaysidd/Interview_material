@@ -46,10 +46,12 @@ class Solution2:
 	def change(self, amount, coins, memo=None):
 		dp = [0] * (amount + 1)
 		dp[0] = 1
+		# ^ important- signifies that if no amount is to be made, it can be done in 1 way, taking no coin
 		for coin in coins:
 			for amount_index in range(1, len(dp)):
 				if amount_index >= coin:
 					dp[amount_index] += dp[amount_index-coin]
+					# ^ if going with same coin, ways to create numbers in multiple of that will remain same
 		return dp[-1]
 
 amount = 200
