@@ -22,16 +22,16 @@ class Solution:
 	O(n) time and O(1) space, not counting output array.
 	F*cking brilliant!
 	"""
-    def productExceptSelf(self, nums):
-        R = [1]*len(nums)
-        for i in range(len(nums)-2, -1, -1):
-            R[i] = nums[i+1]*R[i+1]
-        p = 1
-        for i in range(len(nums)):
-            x = nums[i]
-            nums[i] = p * R[i]
-            p *= x
-        return nums
+	def productExceptSelf(self, nums):
+		R = [1]*len(nums)
+		for i in range(len(nums)-2, -1, -1):
+			R[i] = nums[i+1]*R[i+1]
+		p = 1
+		for i in range(len(nums)):
+			x = nums[i]
+			nums[i] = p * R[i]
+			p *= x
+		return nums
 
 nums = [1,2,3,4]
 a = Solution()
