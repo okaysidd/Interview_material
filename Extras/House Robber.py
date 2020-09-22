@@ -17,7 +17,7 @@ Total amount you can rob = 2 + 9 + 1 = 12.
 """
 """
 # NOTE: This is a dp problem, will be solved using a dp list with length
-n + 1. The second method is effecctively the same that uses two variables
+n + 1. The second method is effectively the same that uses two variables
 that store the prev and prev-1 values instead of using space O(n).
 !!!IMPORTANT QUESTION!!!
 """
@@ -63,6 +63,22 @@ class Solution2:
 			return current
 		except:
 			return 0
+
+	def rob_new2(self, nums):
+		prev, current = 0, 0
+		for i in range(len(nums)):
+			prev, current = current, max(current, prev+nums[i])
+		return current
+
+class Solution3:
+	def rob(self, nums):
+		prev_max = 0
+		current_max = 0
+		for i in range(len(nums)):
+			temp = prev_max
+			prev_max = current_max
+			current_max = max(current_max, temp + nums[i])
+		return current_max
 
 nums = [2,7,9,3,100]
 x = Solution1()
